@@ -54,13 +54,13 @@ export const fetchLogs = async (userKey: string): Promise<Log[]> => {
  */
 export const postLog = async (
   log: RequiredLog,
-  userKey: string
+  monitorKey: string
 ): Promise<number> => {
   const response = await fetch(`${API_URL}logs`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${userKey}`,
+      'Monitor-Key': monitorKey,
     },
     body: JSON.stringify(log),
   });

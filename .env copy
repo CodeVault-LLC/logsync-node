@@ -1,6 +1,0 @@
-# Local env vars for debugging
-TS_NODE_IGNORE="false"
-TS_NODE_FILES="true"
-
-EXAMPLE_PROJECT_ID = 1
-EXAMPLE_USER_KEY = E72s3skjBq9G6A5MfW5MIdt1lH_d2IvQno89zTsatWA=

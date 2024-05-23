@@ -10,54 +10,32 @@ import { Log, RequiredLog } from './types/log';
 
 type LogAppOptions = {
   API_URL?: string;
-  UserKey?: string | null;
+  MonitorKey?: string | null;
 };
 
 export class LogApp {
   private API_URL: string;
-  private UserKey: string | null;
+  private MonitorKey: string | null;
 
   constructor(options: LogAppOptions = {}) {
     this.API_URL = options.API_URL || API_URL;
-    this.UserKey = options.UserKey || null;
+    this.MonitorKey = options.MonitorKey || null;
   }
 
-  public setUserKey(userKey: string): void {
-    this.UserKey = userKey;
-  }
-
-  public async fetchLogs(): Promise<Log[]> {
-    this.check();
-
-    return fetchLogs(this.UserKey as string);
-  }
-
-  public async fetchLogsByProject(projectId: string): Promise<Log[]> {
-    this.check();
-
-    return fetchLogsByProject(projectId, this.UserKey as string);
+  public setMonitorKey(monitorKey: string): void {
+    this.MonitorKey = monitorKey;
   }
 
   public async postLog(log: RequiredLog): Promise<number> {
     this.check();
 
-    return postLog(log, this.UserKey as string);
-  }
-
-  public async fetchLog(logId: number): Promise<Log> {
-    this.check();
-
-    return fetchLog(logId, this.UserKey as string);
-  }
-
-  public async deleteLog(logId: number): Promise<number> {
-    this.check();
-
-    return deleteLog(logId, this.UserKey as string);
+    return postLog(log, this.MonitorKey as string);
   }
 
   private check(): void {
-    if (!this.UserKey) {
+    console.log(this.MonitorKey);
+
+    if (!this.MonitorKey) {
       throw new Error('User key is not set');
     }
   }

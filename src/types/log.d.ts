@@ -1,3 +1,4 @@
+type LogType = 'error' | 'warning' | 'info';
 export interface Log {
   id: number;
 
@@ -19,15 +20,7 @@ export interface Log {
 }
 
 export interface RequiredLog {
-  projectId: number;
-
-  type: string;
-  errorCode: string;
-  message: string;
-
-  lineNumber: number;
-  fileName: string;
-  functionName: string;
-
-  stackTrace: string;
+  MonitorId: number;
+  Type: LogType;
+  Stack: string;
 }
