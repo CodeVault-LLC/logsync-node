@@ -15,11 +15,26 @@ describe('user tests', () => {
   });
 
   beforeAll(() => {
-    nock('http://localhost').post('/log').reply(200, { id: '12345' });
-  });
+    nock('http://127.0.0.1:8080')
+      .post('/logs', {
+        MonitorId: 1,
+        Stack: /.*/, // Use regex to match any stack trace
+        Level: 'error',
+        Context: /.*/, // Use regex to match any context
+      })
+      .reply(200, { id: '12345' });
 
-  afterAll(() => {
-    nock.cleanAll();
+    nock('http://127.0.0.1:8080')
+      .post('/logs', {
+        MonitorId: 1,
+        Level: 'info',
+        Context: /.*/, // Use regex to match any context
+      })
+      .reply(200, { id: '12345' });
+
+    nock.emitter.on('no match', req => {
+      console.log('No match for request:', req);
+    });
   });
 
   it('It should post a log', async () => {

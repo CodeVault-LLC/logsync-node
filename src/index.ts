@@ -38,8 +38,6 @@ export class LogApp {
   }
 
   private check(): void {
-    console.log(this.MonitorKey);
-
     if (!this.MonitorKey) {
       throw new Error('User key is not set');
     }
