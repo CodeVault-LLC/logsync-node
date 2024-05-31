@@ -1,12 +1,6 @@
+import type { RequiredLog } from './types/log';
+import fetch from 'node-fetch';
 import { API_URL } from './constants/constants';
-import {
-  deleteLog,
-  fetchLog,
-  fetchLogs,
-  fetchLogsByProject,
-  postLog,
-} from './fetch/logs';
-import { Log, RequiredLog } from './types/log';
 
 type LogAppOptions = {
   API_URL?: string;
@@ -29,7 +23,18 @@ export class LogApp {
   public async postLog(log: RequiredLog): Promise<number> {
     this.check();
 
-    return postLog(log, this.MonitorKey as string);
+    const response = await fetch(`${API_URL}logs`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Monitor-Key': this.MonitorKey || '',
+      },
+      body: JSON.stringify(log),
+    });
+
+    const id = (await response.json()) as number;
+
+    return id;
   }
 
   private check(): void {

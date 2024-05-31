@@ -17,7 +17,22 @@ describe('user tests', () => {
 
     at new Function (<anonymous>)
     at <anonymous>:1:7`,
-      Type: 'error',
+      Level: 'error',
+      Context:
+        'This is just a test, created by LogSync library - ' +
+        new Date().toLocaleDateString(),
+    });
+
+    expect(id).toBeDefined();
+  });
+
+  it('It should post a info log', async () => {
+    const id = await logApp.postLog({
+      MonitorId: 1,
+      Level: 'info',
+      Context:
+        'This is just a test, created by LogSync library - ' +
+        new Date().toLocaleDateString(),
     });
 
     expect(id).toBeDefined();
