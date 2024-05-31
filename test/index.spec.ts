@@ -1,13 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { LogApp } from '../src/index';
 import { config } from 'dotenv';
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+import nock from 'nock';
+
+// Load environment variables
 config();
 
 const { EXAMPLE_MONITOR_KEY } = process.env;
 
 describe('user tests', () => {
   const logApp = new LogApp({
-    MonitorKey: EXAMPLE_MONITOR_KEY || null,
+    MonitorKey: EXAMPLE_MONITOR_KEY || '12345',
+  });
+
+  beforeAll(() => {
+    nock('http://localhost').post('/log').reply(200, { id: '12345' });
+  });
+
+  afterAll(() => {
+    nock.cleanAll();
   });
 
   it('It should post a log', async () => {
@@ -26,7 +38,7 @@ describe('user tests', () => {
     expect(id).toBeDefined();
   });
 
-  it('It should post a info log', async () => {
+  it('It should post an info log', async () => {
     const id = await logApp.postLog({
       MonitorId: 1,
       Level: 'info',

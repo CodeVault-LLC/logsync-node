@@ -1,7 +1,7 @@
 {
-  "name": "typescript-npm-package-template",
+  "name": "log-sync-node",
   "version": "0.0.0-development",
-  "description": "A template for creating npm packages using TypeScript and VSCode",
+  "description": "A simple logging library for Node.js that uses LogSync Servers.",
   "main": "./lib/index.js",
   "files": [
     "lib/**/*"
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryansonshine/typescript-npm-package-template.git"
+    "url": "git+https://github.com/codevault-llc/logsync-node.git"
   },
   "license": "MIT",
   "author": {
@@ -44,7 +44,7 @@
   "bugs": {
     "url": "https://github.com/CodeVault-LLC/"
   },
-  "homepage": "https://github.com/ryansonshine/typescript-npm-package-template#readme",
+  "homepage": "https://github.com/CodeVault-LLC/logsync-node#readme",
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",
@@ -123,6 +123,7 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "install": "^0.13.0",
+    "nock": "^13.5.4",
     "node-fetch": "^2.7.0",
     "npm": "^10.8.0"
   }
